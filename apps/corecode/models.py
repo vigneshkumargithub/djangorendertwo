@@ -16,8 +16,8 @@ class SiteConfig(models.Model):
 class AcademicSession(models.Model):
     """Academic Session"""
 
-    name = models.CharField(max_length=200, unique=True)
-    current = models.BooleanField(default=True)
+    name = models.CharField(max_length=200)
+    current = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-name"]
@@ -29,14 +29,28 @@ class AcademicSession(models.Model):
 class AcademicTerm(models.Model):
     """Academic Term"""
 
-    name = models.CharField(max_length=20, unique=True)
-    current = models.BooleanField(default=True)
+    name = models.CharField(max_length=20)
+    current = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["name"]
 
     def __str__(self):
         return self.name
+
+
+from django.db.models.signals import post_migrate
+from django.dispatch import receiver
+from .models import AcademicSession, AcademicTerm
+
+@receiver(post_migrate)
+def create_default_data(sender, **kwargs):
+    if not AcademicSession.objects.filter(current=True).exists():
+        AcademicSession.objects.create(name="2024/2025", current=True)
+    if not AcademicTerm.objects.filter(current=True).exists():
+        AcademicTerm.objects.create(name="First Term", current=True)
+
+
 
 
 class Subject(models.Model):
@@ -75,15 +89,16 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to=get_image_filename, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
+    profile_picture = models.ImageField(upload_to="profiles/", blank=True, null=True)
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=30, blank=True)
     email = models.EmailField(max_length=254, blank=True)
 
 
     def __str__(self):
-        return self.user.username
+        # return self.user.username
+        return f"{self.user.username}'s Profile"
 
 ##### for sign-up:
   

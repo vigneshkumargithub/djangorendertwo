@@ -60,7 +60,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
-            {% if user.profile.profile_picture %}
+            {% if user.profile_picture %}
                 <img src="{{ user.profile.profile_picture.url }}" class="rounded-circle" alt="Profile Image" width="30" height="30">
             {% else %}
                 <img src="{% static 'dist/img/avatar.png' %}" alt="Default Profile Picture"

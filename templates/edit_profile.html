@@ -55,7 +55,7 @@
                         {% endif %}
                     </div> -->
                     <div class="col-sm-10">
-                        {% if user.profile.profile_picture %}
+                        {% if user.profile_picture %}
                             <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" width="100">
                         {% else %}
                             <img src="{% static 'dist/img/avatar.png' %}" alt="Default Profile Picture" class="rounded-circle" style="width: 120px; height: 120px;">
