@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "apps.staffs",
     "apps.finance",
     "apps.result",
+    "bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -151,21 +152,21 @@ USE_TZ = True
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
-STATIC_URL = "/static/"
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'static'),
     ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = "/media/"
+MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = '/'
 
 
 SESSION_SAVE_EVERY_REQUEST = True
